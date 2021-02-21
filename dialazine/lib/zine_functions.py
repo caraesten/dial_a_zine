@@ -20,17 +20,17 @@ class ZineFunctions:
             for index_line in self.contents_reader.read_index():
                 self.writer.write(index_line)
             item_choice = await self.reader.read(1)
+            item_choice_int = -1
             if item_choice == 'X':
                 running = False
                 continue
-            try:
-                item_choice = int(item_choice)
-            except ValueError:
-                self.writer.write("\n\nPick a number, or X to quit.\n")
+            item_choice_int = self.contents_reader.map_input_to_numerical_index(item_choice)
+            if item_choice_int == -1:
+                self.writer.write("\n\nPick a story, or X to quit.\n")
                 continue
             self.writer.write("\n\n...you picked: %s" % (item_choice))
             self.writer.write(CLEAR_SCREEN)
-            await self.run_story(item_choice)
+            await self.run_story(item_choice_int)
         self.disconnect()
     
     async def run_story(self, story_number):
@@ -45,6 +45,6 @@ class ZineFunctions:
             await self.reader.read(1)
             page_number += 1
             story_lines = self.contents_reader.read_story(story_number, page_number)
-
+    
     def disconnect(self):
         self.writer.close()

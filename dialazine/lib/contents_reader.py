@@ -1,4 +1,4 @@
-import json, os
+import json, os, string
 from lib.text_screen_reader import TextScreenReader
 
 class ContentsReader:
@@ -23,7 +23,7 @@ class ContentsReader:
         index_lines = ["\n     [ INDEX ]     \n"]
         option_number = 1
         for index_item in self.contents_json['contents']:
-            index_lines.append("\n%s >%s<...by %s\n" % (option_number, index_item['title'], index_item['author']))
+            index_lines.append("\n%s >%s<...by %s\n" % (self._index_to_option(option_number), index_item['title'], index_item['author']))
             option_number += 1
         index_lines.append("\n(or X to quit!)\n")
         return self._wrap_carriage_returns(index_lines)
@@ -41,3 +41,20 @@ class ContentsReader:
 
     def _wrap_carriage_returns(self, lines_list):
         return [x + '\r' for x in lines_list]
+    
+    def map_input_to_numerical_index(self, input_string):
+        try:
+            return int(input_string)
+        except ValueError:
+            pass
+        try:
+            return 10 + string.ascii_uppercase[0:10].index(input_string)
+        except ValueError:
+            return -1
+
+    def _index_to_option(self, input_index):
+        if (input_index < 10):
+            return input_index
+        else:
+            return string.ascii_uppercase[input_index - 10]
+
