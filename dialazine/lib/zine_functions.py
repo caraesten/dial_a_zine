@@ -1,4 +1,5 @@
 from lib.contents_reader import ContentsReader
+import asyncio
 
 CLEAR_SCREEN = "\u001b[2J"
 
@@ -29,7 +30,10 @@ class ZineFunctions:
                 self.writer.write("\n\nPick a story, or X to quit.\n")
                 continue
             self.writer.write("\n\n...you picked: %s" % (item_choice))
+            self.writer.write("\n\n...press RETURN...")
+            await self.reader.read(1)
             self.writer.write(CLEAR_SCREEN)
+            await asyncio.sleep(1)
             await self.run_story(item_choice_int)
         self.disconnect()
     
@@ -42,7 +46,7 @@ class ZineFunctions:
             for story_line in story_lines:
                 self.writer.write(story_line)
             await self.writer.drain()
-            await self.reader.read(1)
+            char_read = await self.reader.readline()
             page_number += 1
             story_lines = self.contents_reader.read_story(story_number, page_number)
     
