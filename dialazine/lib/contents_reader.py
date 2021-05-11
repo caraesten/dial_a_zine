@@ -23,7 +23,7 @@ class ContentsReader:
         index_lines = ["\n     [ INDEX ]     \n"]
         option_number = 1
         for index_item in self.contents_json['contents']:
-            index_lines.append("\n%s >%s<...by %s\n" % (self._index_to_option(option_number), index_item['title'], index_item['author']))
+            index_lines.append("\n%s > %s < ...by %s\n" % (self._index_to_option(option_number), index_item['title'], index_item['author']))
             option_number += 1
         index_lines.append("\n(or X to quit!)\n")
         return self._wrap_carriage_returns(index_lines)
