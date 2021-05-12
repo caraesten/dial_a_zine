@@ -2,6 +2,7 @@ from lib.contents_reader import ContentsReader
 import asyncio
 
 CLEAR_SCREEN = "\u001b[2J"
+NEW_LINE = "\r\n"
 
 class ZineFunctions:
     def __init__(self, reader, writer, index_file_path):
@@ -12,7 +13,7 @@ class ZineFunctions:
     async def run_index(self):
         for welcome_line in self.contents_reader.read_hello_file():
             self.writer.write(welcome_line)
-        self.writer.write("\n\n\n")
+        self.writer.write(NEW_LINE * 3)
         await self.writer.drain()
         # Read one byte (any key)
         await self.reader.read(1)
@@ -22,17 +23,17 @@ class ZineFunctions:
                 self.writer.write(index_line)
             item_choice = await self.reader.read(1)
             item_choice_int = -1
-            if item_choice == 'X':
+            if item_choice.upper() == 'X':
                 running = False
                 continue
             item_choice_int = self.contents_reader.map_input_to_numerical_index(item_choice)
             if item_choice_int == -1:
-                self.writer.write("\n\nPick a story, or X to quit.\n")
+                self.writer.write(f"{NEW_LINE}{NEW_LINE}Pick a story, or X to quit.{NEW_LINE}")
                 continue
-            self.writer.write("\n\n...you picked: %s" % (item_choice))
-            self.writer.write("\n\n...press RETURN...")
+            self.writer.write(f"{NEW_LINE}{NEW_LINE}...you picked: %s" % (item_choice))
+            self.writer.write(f"{NEW_LINE}{NEW_LINE}...press RETURN to start reading, and to continue after each page")
             await self.reader.read(1)
-            self.writer.write(CLEAR_SCREEN)
+            self.writer.write(NEW_LINE + CLEAR_SCREEN)
             await asyncio.sleep(1)
             await self.run_story(item_choice_int)
         self.disconnect()
