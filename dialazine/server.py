@@ -10,6 +10,6 @@ async def shell(reader, writer):
     await zine.run_index()
 
 loop = asyncio.get_event_loop()
-srv = telnetlib3.create_server(port=23, shell=shell)
+srv = telnetlib3.create_server(port=23, shell=shell, timeout=3600)
 server = loop.run_until_complete(srv)
 loop.run_until_complete(server.wait_closed())
