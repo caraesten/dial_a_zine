@@ -4,10 +4,12 @@
         <link rel="stylesheet" href="../main.css">
     </head>
     <body>
-        <div class="viewport">
-            {{#story_lines}}
-                {{{.}}} <br>
-            {{/story_lines}}
+        <div class="main">
+            <div class="viewport">
+                {{#story_lines}}
+                    {{{.}}} <br>
+                {{/story_lines}}
+            </div>
             <div class="navigation">
                 {{#back_link}}
                     <a href="{{.}}">back</a>

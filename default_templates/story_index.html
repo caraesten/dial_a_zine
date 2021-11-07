@@ -4,13 +4,15 @@
         <link rel="stylesheet" href="main.css">
     </head>
     <body>
-        <div class="viewport">
-            <h2>{{header}}</h2>
-            <ul class="stories-list">
-            {{#stories}}
-                <li><a href='{{story_link}}'>{{title_text}}</a></li>
-            {{/stories}}
-            </ul>
+        <div class="main">
+            <div class="viewport">
+                <h2>{{header}}</h2>
+                <ul class="stories-list">
+                {{#stories}}
+                    <li><a href='{{story_link}}'>{{title_text}}</a></li>
+                {{/stories}}
+                </ul>
+            </div>
             <div class="navigation">
                 <a href="index.html">(intro)</a>
             </div>

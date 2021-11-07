@@ -12,10 +12,15 @@ h2 {
     text-align: center;
 }
 
-.viewport {
+.main {
     width: 82ch; /* fudge it a bit */
     margin-left: auto;
     margin-right: auto;
+}
+
+.viewport {
+    height: 30em;
+    margin-top: 2em;
 }
 
 .stories-list li {
