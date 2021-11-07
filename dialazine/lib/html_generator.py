@@ -27,8 +27,9 @@ class HtmlGenerator:
     
     def _write_intro_html(self, intro_template_path, intro_text):
         intro_html = ''
+        html_text = [self._htmlize_whitespace(x) for x in intro_text]
         with open(intro_template_path, 'r') as f:
-            intro_html = chevron.render(f, {'intro_lines': intro_text, 'index_url': self.index_url})
+            intro_html = chevron.render(f, {'intro_lines': html_text, 'index_url': self.index_url})
         file_output_path = self.html_output_path + "/index.html"
         print("Writing intro page to: %s" % file_output_path)
         with open(file_output_path, 'w') as f:
@@ -72,7 +73,7 @@ class HtmlGenerator:
                 page_html = chevron.render(story_template, {
                     'back_link': previous_page,
                     'next_link': next_page,
-                    'story_lines': [x.replace("\n", "") for x in page],
+                    'story_lines': [self._htmlize_whitespace(x.replace("\n", "")) for x in page],
                     'index_url': '../story_index.html',
                     'story_title': item['title'],
                     'story_author': item['author'],
@@ -84,3 +85,9 @@ class HtmlGenerator:
                 print("Writing story page to: %s" % file_output_path)
                 with open(file_output_path, 'w') as f:
                     f.write(page_html)
+    
+    def _htmlize_whitespace(self, string):
+        # linebreaks are already determined via newlines in source text files.
+        # we can (and should) just make all spaces non-breaking.
+        # TODO: evaluate this with screen readers
+        return string.replace(' ', '&nbsp;')
