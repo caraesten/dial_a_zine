@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="main.css">
     </head>
     <body>
         <div class="viewport">
             {{#intro_lines}}
                 {{.}} <br>
             {{/intro_lines}}
-            <a href="{{ index_url }}">(index)</a>
+            <div class="navigation">
+                <a href="{{ index_url }}">(index)</a>
+            </div>
         </div>
     </body>
 </html>

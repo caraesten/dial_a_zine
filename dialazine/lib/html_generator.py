@@ -74,6 +74,9 @@ class HtmlGenerator:
                     'next_link': next_page,
                     'story_lines': [x.replace("\n", "") for x in page],
                     'index_url': '../story_index.html',
+                    'story_title': item['title'],
+                    'story_author': item['author'],
+                    'page_number': current_page,
                 })
                 file_output_dir = self.html_output_path + "/" + output_directory + "/"
                 file_output_path = file_output_dir + str(current_page) + ".html"
