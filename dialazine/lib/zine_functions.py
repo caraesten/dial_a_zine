@@ -19,7 +19,7 @@ class ZineFunctions:
         await self.reader.read(1)
         running = True
         while (running):
-            for index_line in self.contents_reader.read_index():
+            for index_line in self.contents_reader.read_index_lines():
                 self.writer.write(index_line)
             item_choice = await self.reader.read(1)
             item_choice_int = -1

@@ -1,5 +1,7 @@
 import json, os, string
+from lib.common_tools import index_item_string
 from lib.text_screen_reader import TextScreenReader
+from lib.common_tools import index_header
 
 class ContentsReader:
     def __init__(self, contents_file_path):
@@ -16,26 +18,56 @@ class ContentsReader:
     def hello_file_path(self):
         return self.contents_json['hello']
 
-    def read_hello_file(self):
-        return self._wrap_carriage_returns(self.text_reader.read_file_name(self.hello_file_path()))
+    def read_hello_file(self, wrap_returns=True):
+        lines = self.text_reader.read_file_name(self.hello_file_path())
+        if wrap_returns:
+            return self._wrap_carriage_returns(lines)
+        else:
+            return lines
     
-    def read_index(self):
-        index_lines = ["\n     [ INDEX ]     \n"]
+    def read_index_lines(self):
+        index_lines = [index_header()]
         option_number = 1
-        for index_item in self.contents_json['contents']:
-            index_lines.append("\n%s > %s < ...by %s\n" % (self._index_to_option(option_number), index_item['title'], index_item['author']))
+        for index_item in self.read_story_object():
+            index_lines.append(index_item_string(self._index_to_option(option_number), index_item['title'], index_item['author']))
             option_number += 1
         index_lines.append("\n(or X to quit!)\n")
         return self._wrap_carriage_returns(index_lines)
 
-    def read_story(self, story_number, page = 1):
+    def read_story_object(self, include_contents=False):
+        index_list = []
+        story_number = 1
+        for index_item in self.contents_json['contents']:
+            story_item = {
+                'title': index_item['title'],
+                'author': index_item['author'],
+                'directory': index_item['directory'],
+            }
+            if include_contents:
+                page_number = 1
+                story_lines = self.read_story(story_number, page_number, wrap_returns=False)
+                pages = []
+                while len(story_lines) > 0:
+                    pages.append(story_lines)
+                    page_number += 1
+                    story_lines = self.read_story(story_number, page_number, wrap_returns=False)
+                story_item['contents'] = pages
+            story_number += 1
+            index_list.append(story_item)
+        return index_list
+
+    def read_story(self, story_number, page = 1, wrap_returns=True):
         if story_number > len(self.contents_json['contents']):
             return []
         story_obj = self.contents_json['contents'][story_number - 1]
         file_path = "%s/%s.txt" % (story_obj['directory'], page)
         
         if self.text_reader.does_file_exist(file_path):
-            return self._wrap_carriage_returns(self.text_reader.read_file_name(file_path))
+            page_lines = self.text_reader.read_file_name(file_path)
+            if wrap_returns:
+                return self._wrap_carriage_returns(page_lines)
+            else:
+                return page_lines
         else:
             return []
 

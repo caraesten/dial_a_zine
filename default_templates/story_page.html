@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <div class="viewport">
+            {{#story_lines}}
+                {{.}} <br>
+            {{/story_lines}}
+            <div class="navigation">
+                {{#back_link}}
+                    <a href="{{.}}">back</a>
+                {{/back_link}}
+                <a href="{{ index_url }}">(index)</a>
+                {{#next_link}}
+                <a href="{{.}}">next</a>
+                {{/next_link}}
+            </div>
+        </div>
+    </body>
+</html>
