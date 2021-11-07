@@ -5,7 +5,7 @@ from pathlib import Path
 from lib.html_generator import HtmlGenerator
 
 TEMPLATES = "default_templates"
-CONTENT_FOLDER = "example_issue"
+CONTENT_FOLDER = "dial_a_zine_issue1"
 
 parser = argparse.ArgumentParser(description="Use this tool to export html documents for your zine")
 parser.add_argument("outputdir", type=Path, help="output directory for generated HTML")
