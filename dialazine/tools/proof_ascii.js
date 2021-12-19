@@ -1,5 +1,5 @@
 class AsciiScanner {
-    static ASCII_REGEX = /([\u{0080}-\u{FFFF}]+)/gu;
+    static ASCII_REGEX = /([\u{00e1}-\u{FFFF}]+)/gu;
     constructor(inputElement, matchesOutput, textOutput) {
         this.inputElement = inputElement;
         this.matchesOutput = matchesOutput;
