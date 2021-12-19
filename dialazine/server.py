@@ -5,7 +5,7 @@ import pathlib
 from lib.zine_functions import ZineFunctions
 
 LOCALHOST_PORT = 23
-CONTENT_FOLDER = "example_issue"
+CONTENT_FOLDER = "newsession_issue2"
 
 async def shell(reader, writer):
     root_dir_path = pathlib.Path(__file__).parent.parent.absolute()

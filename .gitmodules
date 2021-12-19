@@ -1,3 +1,6 @@
 [submodule "issue1"]
 	path = issue1
 	url = git@github.com:caraesten/dial_a_zine_issue1.git
+[submodule "newsession_issue2"]
+	path = newsession_issue2
+	url = git@github.com:caraesten/newsession_issue2.git
