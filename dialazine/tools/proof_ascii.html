@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ASCII Scanner</title>
+        <script type="text/javascript" src="proof_ascii.js"></script>
+        <style type="text/css">
+            body {
+                background-color: #444;
+                color: #ddd;
+            }
+            #main-body {
+                width: 60%;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+            }
+            textarea {
+                background-color: #666;
+            }
+            #text-input {
+                width: 90%;
+                margin-left: auto;
+                margin-right: auto;
+                min-height: 20em;
+                color: #ddd;
+            }
+            #matches-output {
+                margin-top: 1em;
+                background-color: #666;
+                width: 90%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            #text-output {
+                margin-top: 1em;
+                text-align: left;
+            }
+
+            #text-output .invalid {
+                background-color: #d66;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="main-body">
+            <h1>ASCII Scanner</h1>
+            <h3>Paste Text Below</h3>
+            <textarea id="text-input"></textarea>
+            <div id="matches-output"></div>
+            <div id="text-output"></div>
+        </div>
+    </body>
+</html>
