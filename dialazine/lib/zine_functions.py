@@ -13,13 +13,12 @@ class ZineFunctions:
     async def run_index(self):
         for welcome_line in self.contents_reader.read_hello_file():
             self.writer.write(welcome_line)
-        self.writer.write(NEW_LINE * 3)
         await self.writer.drain()
         # Read one byte (any key)
         await self.reader.read(1)
         running = True
         while (running):
-            for index_line in self.contents_reader.read_index():
+            for index_line in self.contents_reader.read_index_lines():
                 self.writer.write(index_line)
             item_choice = await self.reader.read(1)
             item_choice_int = -1

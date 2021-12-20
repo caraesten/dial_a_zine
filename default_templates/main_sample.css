@@ -1,0 +1,44 @@
+body {
+    font-family: monospace;
+    background-color: black;
+    color: #39ff14;
+}
+
+a {
+    color: #ddd;
+}
+
+h2 {
+    text-align: center;
+}
+
+.main {
+    width: 82ch; /* fudge it a bit */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.viewport {
+    height: 30em;
+    margin-top: 2em;
+}
+
+.stories-list li {
+    margin: 0.5em;
+}
+
+.navigation {
+    margin-top: 2em;
+    text-align: center;
+}
+
+.navigation a {
+    display: inline-block;
+}
+
+.about {
+    color: #1c830a;
+    text-align: center;
+    font-size: 10pt;
+    margin-top: 1em;
+}

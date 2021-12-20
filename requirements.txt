@@ -1,1 +1,2 @@
 telnetlib3==1.0.4
+chevron==0.14.0

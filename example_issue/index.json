@@ -1,0 +1,15 @@
+{
+    "hello": "dolly.txt",
+    "contents": [
+        {
+            "title": "blah",
+            "author": "me",
+            "directory": "testtest"
+        },
+        {
+            "title": "another one",
+            "author": "also me",
+            "directory": "theotherone"
+        }
+    ]
+}
