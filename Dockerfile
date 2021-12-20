@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-ARG ISSUE_DIR=issue1
+ARG ISSUE_DIR=newsession_issue2
 
 FROM python:3.8-slim-buster
 
